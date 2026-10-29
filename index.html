@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071426">
+    <title>Monitoring TA MPPT - PLTS Off-Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BACKGROUND ANIMATION -->
+    <div class="background-effects" aria-hidden="true">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+        <div class="glow glow-three"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <main class="site-content">
+
+        <!-- ================= COVER / LOBBY ================= -->
+        <section id="lobby" class="screen lobby active">
+            <div class="cover-content">
+
+                <div class="logo-container">
+                    <div class="logo-frame">
+                        <img src="images/blu.png" alt="Logo BLU">
+                    </div>
+                    <div class="logo-frame logo-polines">
+                        <img src="images/polines.png" alt="Logo POLINES">
+                    </div>
+                    <div class="logo-frame">
+                        <img src="images/hme.png" alt="Logo HME">
+                    </div>
+                </div>
+
+                <p class="eyebrow">SISTEM MONITORING PLTS OFF-GRID</p>
+
+                <h1>
+                    RANCANG BANGUN MAXIMUM POWER POINT TRACKING
+                    (MPPT) BUCK-BOOST CONVERTER MENGGUNAKAN
+                    METODE PERTURB AND OBSERVE (P&amp;O)
+                    PADA PLTS OFF-GRID
+                </h1>
+
+                <div class="cover-divider"></div>
+
+                <p class="campus-name">POLITEKNIK NEGERI SEMARANG</p>
+                <p class="study-program">
+                    Jurusan Teknik Elektro<br>
+                    Program Studi Teknologi Rekayasa Instalasi Listrik
+                </p>
+
+                <div class="cover-buttons">
+                    <button class="btn btn-outline" onclick="showPage('tim')">
+                        Tim Peneliti
+                    </button>
+                    <button class="btn btn-primary" onclick="showPage('dashboard')">
+                        Dashboard Monitoring <span>→</span>
+                    </button>
+                </div>
+
+                <p class="cover-footer">FINAL PROJECT · MPPT P&amp;O</p>
+            </div>
+        </section>
+
+
+        <!-- ================= TIM PENELITI ================= -->
+        <section id="tim" class="screen page-screen hidden">
+            <header class="page-heading">
+                <button class="btn btn-outline back-button"
+                        onclick="showPage('lobby')">
+                    ← Kembali ke Lobby
+                </button>
+
+                <p class="eyebrow">PROJECT TEAM</p>
+                <h2>Tim Peneliti</h2>
+                <p class="section-description">
+                    Tim penyusun tugas akhir sistem monitoring MPPT.
+                </p>
+            </header>
+
+            <div class="team-grid">
+
+                <article class="team-card">
+                    <div class="photo-frame">
+                        <img src="images/foto adit.jpg"
+                             alt="Foto Aditya Rian Putra P">
+                    </div>
+                    <h3>Aditya Rian Putra P</h3>
+                    <p class="team-nim">4.32.23.1.01</p>
+                </article>
+
+                <article class="team-card">
+                    <div class="photo-frame">
+                        <img src="images/foto star.jpg"
+                             alt="Foto Starlenta Regita Istighfara">
+                    </div>
+                    <h3>Starlenta Regita Istighfara</h3>
+                    <p class="team-nim">4.32.23.1.21</p>
+                </article>
+
+                <article class="team-card">
+                    <div class="photo-frame">
+                        <img src="images/foto nopal.jpg"
+                             alt="Foto Nauval Daffa Azmiy">
+                    </div>
+                    <h3>Nauval Daffa Azmiy</h3>
+                    <p class="team-nim">4.32.23.1.18</p>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- ================= DASHBOARD ================= -->
+        <section id="dashboard" class="screen dashboard hidden">
+
+            <header class="dashboard-header">
+                <div class="dashboard-brand">
+                    <div class="brand-mark">MPPT</div>
+                    <div>
+                        <p class="brand-title">SOLAR MONITORING</p>
+                        <p class="brand-subtitle">PLTS OFF-GRID SYSTEM</p>
+                    </div>
+                </div>
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>MONITORING</span>
+                </div>
+            </header>
+
+            <!-- NAVIGASI UTAMA -->
+            <nav class="main-nav" aria-label="Navigasi dashboard">
+                <button class="nav-button" onclick="showPage('lobby')">
+                    ← Lobby
+                </button>
+                <button class="nav-button active"
+                        data-target="beranda"
+                        onclick="showMonitoring('beranda')">
+                    Beranda
+                </button>
+                <button class="nav-button"
+                        data-target="pv"
+                        onclick="showMonitoring('pv')">
+                    PLTS
+                </button>
+                <button class="nav-button"
+                        data-target="mppt"
+                        onclick="showMonitoring('mppt')">
+                    MPPT
+                </button>
+                <button class="nav-button"
+                        data-target="ac"
+                        onclick="showMonitoring('ac')">
+                    Inverter AC
+                </button>
+            </nav>
+
+
+            <!-- ================= BERANDA ================= -->
+            <section id="beranda" class="monitoring-page">
+
+                <header class="page-heading">
+                    <p class="eyebrow">OVERVIEW SISTEM</p>
+                    <h2>Monitoring PLTS Off-Grid</h2>
+                    <p class="section-description">
+                        Pemantauan parameter panel surya, MPPT Buck-Boost,
+                        dan keluaran inverter AC.
+                    </p>
+                </header>
+
+                <!-- DIAGRAM ALUR SISTEM -->
+                <section class="flow-panel">
+                    <div class="panel-heading">
+                        <span class="section-index">01</span>
+                        <div>
+                            <h3>Alur Sistem PLTS Off-Grid</h3>
+                            <p>Alur energi dari sumber PV menuju beban AC</p>
+                        </div>
+                    </div>
+
+                    <div class="system-flow">
+
+                        <div class="flow-node">
+                            <div class="flow-icon">☀</div>
+                            <h4>Panel Surya</h4>
+                            <p>PV</p>
+                        </div>
+
+                        <div class="flow-arrow" aria-hidden="true">→</div>
+
+                        <div class="flow-node">
+                            <div class="flow-icon">ϟ</div>
+                            <h4>MPPT</h4>
+                            <p>Buck-Boost</p>
+                        </div>
+
+                        <div class="flow-arrow" aria-hidden="true">→</div>
+
+                        <div class="flow-node">
+                            <div class="flow-icon">▰</div>
+                            <h4>Baterai</h4>
+                            <p>Penyimpanan energi</p>
+                        </div>
+
+                        <div class="flow-arrow" aria-hidden="true">→</div>
+
+                        <div class="flow-node">
+                            <div class="flow-icon">∿</div>
+                            <h4>Inverter AC</h4>
+                            <p>Konversi DC–AC</p>
+                        </div>
+
+                        <div class="flow-arrow" aria-hidden="true">→</div>
+
+                        <div class="flow-node">
+                            <div class="flow-icon">⌁</div>
+                            <h4>Beban AC</h4>
+                            <p>Keluaran AC</p>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- PARAMETER DAYA -->
+                <section class="parameter-section">
+                    <div class="section-heading">
+                        <span class="section-index">02</span>
+                        <h3>Parameter Daya</h3>
+                    </div>
+
+                    <div class="parameter-grid grid-three">
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">PLTS</span>
+                                <span class="card-symbol">P</span>
+                            </div>
+                            <h4>Daya PLTS</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">W</span>
+                            </div>
+                            <p class="parameter-code">P PLTS</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">MPPT</span>
+                                <span class="card-symbol">P</span>
+                            </div>
+                            <h4>Daya MPPT</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">W</span>
+                            </div>
+                            <p class="parameter-code">P MPPT</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">INVERTER AC</span>
+                                <span class="card-symbol">P</span>
+                            </div>
+                            <h4>Daya AC</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">W</span>
+                            </div>
+                            <p class="parameter-code">P AC</p>
+                        </article>
+
+                    </div>
+                </section>
+
+
+                <!-- PARAMETER TEGANGAN -->
+                <section class="parameter-section">
+                    <div class="section-heading">
+                        <span class="section-index">03</span>
+                        <h3>Parameter Tegangan</h3>
+                    </div>
+
+                    <div class="parameter-grid grid-three">
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">PLTS</span>
+                                <span class="card-symbol">V</span>
+                            </div>
+                            <h4>Tegangan PLTS</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">V</span>
+                            </div>
+                            <p class="parameter-code">V PLTS</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">MPPT</span>
+                                <span class="card-symbol">V</span>
+                            </div>
+                            <h4>Tegangan MPPT</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">V</span>
+                            </div>
+                            <p class="parameter-code">V MPPT</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">INVERTER AC</span>
+                                <span class="card-symbol">V</span>
+                            </div>
+                            <h4>Tegangan AC</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">V</span>
+                            </div>
+                            <p class="parameter-code">V AC</p>
+                        </article>
+
+                    </div>
+                </section>
+
+
+                <!-- PARAMETER ARUS -->
+                <section class="parameter-section">
+                    <div class="section-heading">
+                        <span class="section-index">04</span>
+                        <h3>Parameter Arus</h3>
+                    </div>
+
+                    <div class="parameter-grid grid-three">
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">PLTS</span>
+                                <span class="card-symbol">I</span>
+                            </div>
+                            <h4>Arus PLTS</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">A</span>
+                            </div>
+                            <p class="parameter-code">I PLTS</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">MPPT</span>
+                                <span class="card-symbol">I</span>
+                            </div>
+                            <h4>Arus MPPT</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">A</span>
+                            </div>
+                            <p class="parameter-code">I MPPT</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">INVERTER AC</span>
+                                <span class="card-symbol">I</span>
+                            </div>
+                            <h4>Arus AC</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">A</span>
+                            </div>
+                            <p class="parameter-code">I AC</p>
+                        </article>
+
+                    </div>
+                </section>
+
+
+                <!-- DUTY CYCLE DAN EFISIENSI -->
+                <section class="parameter-section">
+                    <div class="section-heading">
+                        <span class="section-index">05</span>
+                        <h3>Kontrol dan Performa MPPT</h3>
+                    </div>
+
+                    <div class="parameter-grid grid-two">
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">KONTROL MPPT</span>
+                                <span class="card-symbol">%</span>
+                            </div>
+                            <h4>Duty Cycle</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">%</span>
+                            </div>
+                            <p class="parameter-code">Duty Cycle</p>
+                        </article>
+
+                        <article class="parameter-card">
+                            <div class="card-top">
+                                <span class="card-category">PERFORMA MPPT</span>
+                                <span class="card-symbol">η</span>
+                            </div>
+                            <h4>Efisiensi MPPT</h4>
+                            <div class="parameter-value">
+                                <span class="value-number">--</span>
+                                <span class="value-unit">%</span>
+                            </div>
+                            <p class="parameter-code">Efisiensi</p>
+                        </article>
+
+                    </div>
+                </section>
+
+            </section>
+
+
+            <!-- ================= HALAMAN PLTS ================= -->
+            <section id="pv" class="monitoring-page hidden">
+
+                <header class="page-heading">
+                    <p class="eyebrow">PHOTOVOLTAIC MONITORING</p>
+                    <h2>Monitoring Panel Surya</h2>
+                    <p class="section-description">
+                        Parameter listrik pada sisi panel surya.
+                    </p>
+                </header>
+
+                <div class="parameter-grid grid-three">
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">TEGANGAN</span>
+                            <span class="card-symbol">V</span>
+                        </div>
+                        <h4>Tegangan PLTS</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">V</span>
+                        </div>
+                        <p class="parameter-code">V PLTS</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">ARUS</span>
+                            <span class="card-symbol">I</span>
+                        </div>
+                        <h4>Arus PLTS</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">A</span>
+                        </div>
+                        <p class="parameter-code">I PLTS</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">DAYA</span>
+                            <span class="card-symbol">P</span>
+                        </div>
+                        <h4>Daya PLTS</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">W</span>
+                        </div>
+                        <p class="parameter-code">P PLTS</p>
+                    </article>
+
+                </div>
+            </section>
+
+
+            <!-- ================= HALAMAN MPPT ================= -->
+            <section id="mppt" class="monitoring-page hidden">
+
+                <header class="page-heading">
+                    <p class="eyebrow">MAXIMUM POWER POINT TRACKING</p>
+                    <h2>Monitoring MPPT Buck-Boost</h2>
+                    <p class="section-description">
+                        Parameter konverter dan performa algoritma P&amp;O.
+                    </p>
+                </header>
+
+                <div class="parameter-grid grid-three">
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">TEGANGAN</span>
+                            <span class="card-symbol">V</span>
+                        </div>
+                        <h4>Tegangan MPPT</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">V</span>
+                        </div>
+                        <p class="parameter-code">V MPPT</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">ARUS</span>
+                            <span class="card-symbol">I</span>
+                        </div>
+                        <h4>Arus MPPT</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">A</span>
+                        </div>
+                        <p class="parameter-code">I MPPT</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">DAYA</span>
+                            <span class="card-symbol">P</span>
+                        </div>
+                        <h4>Daya MPPT</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">W</span>
+                        </div>
+                        <p class="parameter-code">P MPPT</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">KONTROL</span>
+                            <span class="card-symbol">%</span>
+                        </div>
+                        <h4>Duty Cycle</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">%</span>
+                        </div>
+                        <p class="parameter-code">Duty Cycle</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">PERFORMA</span>
+                            <span class="card-symbol">η</span>
+                        </div>
+                        <h4>Efisiensi MPPT</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">%</span>
+                        </div>
+                        <p class="parameter-code">Efisiensi</p>
+                    </article>
+
+                </div>
+            </section>
+
+
+            <!-- ================= HALAMAN INVERTER AC ================= -->
+            <section id="ac" class="monitoring-page hidden">
+
+                <header class="page-heading">
+                    <p class="eyebrow">AC OUTPUT MONITORING</p>
+                    <h2>Monitoring Inverter AC</h2>
+                    <p class="section-description">
+                        Parameter listrik pada sisi keluaran inverter.
+                    </p>
+                </header>
+
+                <div class="parameter-grid grid-two">
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">TEGANGAN</span>
+                            <span class="card-symbol">V</span>
+                        </div>
+                        <h4>Tegangan AC</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">V</span>
+                        </div>
+                        <p class="parameter-code">V AC</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">ARUS</span>
+                            <span class="card-symbol">I</span>
+                        </div>
+                        <h4>Arus AC</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">A</span>
+                        </div>
+                        <p class="parameter-code">I AC</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">DAYA</span>
+                            <span class="card-symbol">P</span>
+                        </div>
+                        <h4>Daya AC</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">W</span>
+                        </div>
+                        <p class="parameter-code">P AC</p>
+                    </article>
+
+                    <article class="parameter-card">
+                        <div class="card-top">
+                            <span class="card-category">FREKUENSI</span>
+                            <span class="card-symbol">f</span>
+                        </div>
+                        <h4>Frekuensi AC</h4>
+                        <div class="parameter-value">
+                            <span class="value-number">--</span>
+                            <span class="value-unit">Hz</span>
+                        </div>
+                        <p class="parameter-code">Frekuensi</p>
+                    </article>
+
+                </div>
+            </section>
+
+
+            <footer class="dashboard-footer">
+                <span>MPPT P&amp;O · BUCK-BOOST CONVERTER</span>
+                <span>PLTS OFF-GRID MONITORING</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <!-- NAVIGASI HALAMAN -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll(".screen").forEach(function (page) {
+                page.classList.add("hidden");
+                page.classList.remove("active");
+            });
+
+            const selectedPage = document.getElementById(pageId);
+
+            if (selectedPage) {
+                selectedPage.classList.remove("hidden");
+                selectedPage.classList.add("active");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+
+            if (pageId === "dashboard") {
+                showMonitoring("beranda");
+            }
+        }
+
+        function showMonitoring(pageId) {
+            document.querySelectorAll(".monitoring-page").forEach(function (page) {
+                page.classList.add("hidden");
+            });
+
+            const selectedPage = document.getElementById(pageId);
+
+            if (selectedPage) {
+                selectedPage.classList.remove("hidden");
+            }
+
+            document.querySelectorAll(".nav-button[data-target]").forEach(function (button) {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.target === pageId
+                );
+            });
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1094 @@
+
+/* =========================================
+   MONITORING TA MPPT - DARK TECH
+   Midnight Blue + Electric Cyan
+========================================= */
+
+:root {
+    --bg: #071426;
+    --bg-dark: #040c18;
+    --panel: #0b1d32;
+    --card: #102943;
+    --cyan: #13d9f5;
+    --cyan-light: #8aefff;
+    --white: #f3f7fc;
+    --muted: #a8c1d9;
+    --border: rgba(19, 217, 245, 0.25);
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* RESET */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--white);
+    background: var(--bg);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.site-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* =========================================
+   BACKGROUND ANIMATION
+========================================= */
+
+.background-effects {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        #040c18,
+        #071b31,
+        #071426,
+        #0a2038
+    );
+    background-size: 300% 300%;
+    animation: backgroundMove 20s ease-in-out infinite alternate;
+}
+
+.grid-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(19, 217, 245, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19, 217, 245, 0.12) 1px, transparent 1px);
+    background-size: 45px 45px;
+}
+
+.glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.18;
+    animation: glowFloat 16s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    top: -180px;
+    left: -100px;
+    background: #087bc1;
+}
+
+.glow-two {
+    top: 35%;
+    right: -180px;
+    background: #13d9f5;
+    animation-delay: -5s;
+}
+
+.glow-three {
+    bottom: -220px;
+    left: 25%;
+    background: #154eb3;
+    animation-delay: -9s;
+}
+
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes glowFloat {
+    0% {
+        transform: translate(0, 0) scale(0.9);
+    }
+    50% {
+        transform: translate(35px, 30px) scale(1.08);
+    }
+    100% {
+        transform: translate(-20px, 55px) scale(0.95);
+    }
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes arrowPulse {
+    0%, 100% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 12px var(--cyan);
+    }
+}
+
+.screen.active {
+    animation: pageEnter 0.35s ease both;
+}
+
+/* =========================================
+   TOMBOL UMUM
+========================================= */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 12px 22px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    color: #041321;
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+.btn-primary:hover {
+    background: var(--cyan-light);
+}
+
+.btn-outline {
+    color: var(--cyan);
+    background: var(--panel);
+    border-color: var(--border);
+}
+
+.btn-outline:hover {
+    color: #041321;
+    background: var(--cyan);
+}
+
+/* =========================================
+   COVER / LOBBY
+========================================= */
+
+.lobby {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 22px;
+    text-align: center;
+}
+
+.cover-content {
+    width: 100%;
+    max-width: 1050px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 28px;
+}
+
+.logo-frame {
+    width: 95px;
+    height: 95px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-polines img {
+    transform: scale(1.12);
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    line-height: 1.7;
+}
+
+.lobby h1 {
+    max-width: 960px;
+    margin: 8px 0 22px;
+    color: var(--white);
+    font-size: clamp(24px, 3.3vw, 38px);
+    font-weight: 800;
+    line-height: 1.45;
+    text-wrap: balance;
+}
+
+.cover-divider {
+    width: 95px;
+    height: 3px;
+    margin-bottom: 22px;
+    border-radius: 5px;
+    background: var(--cyan);
+    box-shadow: 0 0 18px rgba(19, 217, 245, 0.4);
+}
+
+.campus-name {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.study-program {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.cover-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.cover-footer {
+    margin: 36px 0 0;
+    color: #7895b0;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+}
+
+/* =========================================
+   HEADING DAN HALAMAN
+========================================= */
+
+.page-screen,
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    padding: 28px clamp(16px, 4vw, 55px);
+}
+
+.page-heading {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 32px;
+    text-align: center;
+}
+
+.page-heading h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(26px, 3vw, 37px);
+    line-height: 1.35;
+}
+
+.section-description {
+    max-width: 700px;
+    margin: 12px auto 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   TIM PENELITI
+========================================= */
+
+.back-button {
+    margin-bottom: 30px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.team-card {
+    min-width: 0;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(16, 41, 67, 0.94);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan);
+}
+
+.photo-frame {
+    width: 155px;
+    height: 185px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.team-card h3 {
+    margin: 0;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.team-nim {
+    margin: 9px 0 0;
+    color: var(--cyan);
+    font-size: 13px;
+    letter-spacing: 0.8px;
+}
+
+/* =========================================
+   HEADER DASHBOARD
+========================================= */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 5px 0 22px;
+    border-bottom: 1px solid rgba(168, 193, 217, 0.15);
+}
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand-mark {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #041321;
+    background: var(--cyan);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.brand-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.brand-subtitle {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.system-status {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f5c451;
+}
+
+/* =========================================
+   NAVIGASI DASHBOARD
+========================================= */
+
+.main-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px;
+    margin: 22px 0 36px;
+    background: rgba(11, 29, 50, 0.92);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.nav-button {
+    min-height: 43px;
+    padding: 11px 19px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-button:hover {
+    color: var(--cyan);
+    background: rgba(19, 217, 245, 0.08);
+}
+
+.nav-button.active {
+    color: #041321;
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+/* =========================================
+   AREA MONITORING
+========================================= */
+
+.monitoring-page {
+    width: 100%;
+    max-width: 1550px;
+    margin: 0 auto;
+    animation: pageEnter 0.3s ease both;
+}
+
+.monitoring-page > .page-heading {
+    margin-bottom: 36px;
+}
+
+/* =========================================
+   DIAGRAM ALUR SISTEM
+========================================= */
+
+.flow-panel {
+    width: 100%;
+    padding: 25px;
+    margin-bottom: 38px;
+    background: rgba(11, 29, 50, 0.95);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.section-index {
+    width: 37px;
+    height: 37px;
+    flex: 0 0 37px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cyan);
+    background: rgba(19, 217, 245, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.panel-heading h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.panel-heading p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.system-flow {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 9px;
+    width: 100%;
+}
+
+.flow-node {
+    min-width: 0;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 18px 7px;
+    text-align: center;
+    background: linear-gradient(145deg, #102943, #0b1d32);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.flow-node:hover {
+    transform: translateY(-3px);
+    border-color: var(--cyan);
+}
+
+.flow-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cyan);
+    background: rgba(19, 217, 245, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    font-size: 24px;
+}
+
+.flow-node h4 {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.flow-node p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.flow-arrow {
+    flex: 0 0 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cyan);
+    font-size: 21px;
+    font-weight: 800;
+    animation: arrowPulse 2.5s ease-in-out infinite;
+}
+
+/* =========================================
+   KELOMPOK PARAMETER
+========================================= */
+
+.parameter-section {
+    width: 100%;
+    margin-bottom: 38px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-heading h3 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.parameter-grid {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.grid-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.
+.grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Duty Cycle dan Efisiensi di tengah halaman MPPT */
+#mppt .parameter-grid.grid-three {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#mppt .parameter-grid.grid-three .parameter-card:nth-child(1),
+#mppt .parameter-grid.grid-three .parameter-card:nth-child(2),
+#mppt .parameter-grid.grid-three .parameter-card:nth-child(3) {
+    grid-column: span 2;
+}
+
+#mppt .parameter-grid.grid-three .parameter-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+#mppt .parameter-grid.grid-three .parameter-card:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+@media (max-width: 1000px) {
+    #mppt .parameter-grid.grid-three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #mppt .parameter-grid.grid-three .parameter-card {
+        grid-column: auto;
+    }
+
+    #mppt .parameter-grid.grid-three .parameter-card:last-child {
+        grid-column: 1 / -1;
+        width: calc(50% - 10px);
+        justify-self: center;
+    }
+}
+
+@media (max-width: 650px) {
+    #mppt .parameter-grid.grid-three {
+        grid-template-columns: 1fr;
+    }
+
+    #mppt .parameter-grid.grid-three .parameter-card,
+    #mppt .parameter-grid.grid-three .parameter-card:last-child {
+        grid-column: auto;
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   KARTU PARAMETER
+========================================= */
+
+.parameter-card {
+    position: relative;
+    min-width: 0;
+    min-height: 190px;
+    padding: 23px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(145deg, #102943, #0a1b2e);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.parameter-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18%;
+    width: 64%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.parameter-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(19, 217, 245, 0.65);
+}
+
+.card-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.card-category {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.card-symbol {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cyan);
+    background: rgba(19, 217, 245, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.parameter-card h4 {
+    margin: 0 0 15px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.parameter-value {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.value-number {
+    color: var(--cyan);
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.value-unit {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.parameter-code {
+    margin: 12px 0 0;
+    color: #7895b0;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.dashboard-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 48px;
+    padding: 20px 0 8px;
+    color: #7895b0;
+    border-top: 1px solid rgba(168, 193, 217, 0.14);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+    .system-flow {
+        flex-wrap: wrap;
+    }
+
+    .flow-node {
+        flex: 1 1 25%;
+    }
+
+    .flow-arrow {
+        flex-basis: 12px;
+    }
+
+    .grid-three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .team-grid {
+        gap: 15px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE HP
+========================================= */
+
+@media (max-width: 650px) {
+    .lobby {
+        padding: 32px 16px;
+    }
+
+    .logo-container {
+        gap: 17px;
+        margin-bottom: 24px;
+    }
+
+    .logo-frame {
+        width: 68px;
+        height: 68px;
+    }
+
+    .logo-polines img {
+        transform: scale(1.12);
+    }
+
+    .lobby h1 {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+
+    .campus-name {
+        font-size: 12px;
+    }
+
+    .study-program {
+        font-size: 12px;
+    }
+
+    .cover-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .cover-buttons .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .page-screen,
+    .dashboard {
+        padding: 18px 13px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .brand-mark {
+        width: 43px;
+        height: 43px;
+        font-size: 11px;
+    }
+
+    .brand-title {
+        font-size: 10px;
+    }
+
+    .brand-subtitle {
+        font-size: 9px;
+    }
+
+    .system-status {
+        padding: 8px;
+        font-size: 9px;
+    }
+
+    .main-nav {
+        gap: 6px;
+        padding: 9px;
+        margin: 17px 0 28px;
+    }
+
+    .nav-button {
+        flex: 1 1 28%;
+        padding: 10px 7px;
+        font-size: 11px;
+    }
+
+    .page-heading {
+        margin-bottom: 26px;
+    }
+
+    .section-description {
+        font-size: 12px;
+    }
+
+    .flow-panel {
+        padding: 17px 12px;
+        margin-bottom: 29px;
+    }
+
+    .panel-heading {
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+
+    .panel-heading h3 {
+        font-size: 15px;
+    }
+
+    .panel-heading p {
+        font-size: 11px;
+    }
+
+    .system-flow {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 15px minmax(0, 1fr);
+        gap: 9px 4px;
+    }
+
+    .flow-node {
+        width: 100%;
+        min-height: 110px;
+        padding: 11px 4px;
+    }
+
+    .flow-icon {
+        width: 33px;
+        height: 33px;
+        font-size: 19px;
+    }
+
+    .flow-node h4 {
+        font-size: 10px;
+    }
+
+    .flow-node p {
+        font-size: 9px;
+    }
+
+    .flow-arrow {
+        font-size: 16px;
+    }
+
+    .parameter-section {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h3 {
+        font-size: 16px;
+    }
+
+    .grid-three,
+    .grid-two {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 420px;
+        margin-right: auto;
+        margin-left: auto;
+        gap: 14px;
+    }
+
+    .parameter-card {
+        min-height: 170px;
+        padding: 21px;
+    }
+
+    .value-number {
+        font-size: 33px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .photo-frame {
+        width: 145px;
+        height: 175px;
+    }
+
+    .dashboard-footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   AKSESIBILITAS ANIMASI
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
